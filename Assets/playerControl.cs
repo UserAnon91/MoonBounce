@@ -90,8 +90,8 @@ public class playerControl : MonoBehaviour {
 
 		ourRigidbody.angularVelocity = Vector3.zero;
 
-		if (ourGravityPlayer != null && ourGravityPlayer.gravityAttractedObject != null) {
-			ourRigidbody.AddForce ((ourGravityPlayer.gravityAttractedObject.transform.position - transform.position).normalized * 9.81f, ForceMode.Acceleration);
+		if (ourGravityPlayer != null && ourGravityPlayer.planetCollider != null) {
+			ourRigidbody.AddForce ((ourGravityPlayer.planetCollider.transform.position - transform.position).normalized * 9.81f, ForceMode.Acceleration);
 
 		}
 
@@ -100,11 +100,11 @@ public class playerControl : MonoBehaviour {
 
 	bool isGrounded () {
 
-		if (ourGravityPlayer.planet == null) return false;
+		if (ourGravityPlayer.planetCollider == null) return false;
 
 		RaycastHit hit;
 
-		Physics.Raycast (transform.position, ourGravityPlayer.planet.transform.position - transform.position, out hit, 1.1f);
+		Physics.Raycast (transform.position, ourGravityPlayer.planetCollider.transform.position - transform.position, out hit, 1.1f);
 
 		return hit.collider;
 

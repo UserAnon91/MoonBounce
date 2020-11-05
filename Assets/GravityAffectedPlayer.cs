@@ -12,19 +12,19 @@ public class GravityAffectedPlayer : GravityAffectedEntity {
     // public float height = 2.0f;             //height from ground level
     private Transform centre; //transform for planet
     private float radius; //calculated radius from collider
-    public SphereCollider planet; //collider for planet
+    public SphereCollider planetCollider; //collider for planet
 
     private playerControl ourPlayer;
 
     //https://forum.unity.com/threads/character-align-to-surface-normal.33987
     void Start () {
-        if (planet == null) {
+        if (planetCollider == null) {
             centre = transform;
             radius = 0;
         } else {
             //consider scale applied to planet transform (assuming uniform, just pick one)
-            radius = planet.radius * planet.transform.localScale.y;
-            centre = planet.transform;
+            radius = planetCollider.radius * planetCollider.transform.localScale.y;
+            centre = planetCollider.transform;
 
         }
 
@@ -59,8 +59,8 @@ public class GravityAffectedPlayer : GravityAffectedEntity {
     }
     public override void SetGravityObject (GameObject go) {
         base.SetGravityObject (go);
-        planet = go.transform.GetComponent<SphereCollider> ();
-        radius = planet.radius * planet.transform.localScale.y;
-        centre = planet.transform;
+        planetCollider = go.transform.GetComponent<SphereCollider> ();
+        radius = planetCollider.radius * planetCollider.transform.localScale.y;
+        centre = planetCollider.transform;
     }
 }
